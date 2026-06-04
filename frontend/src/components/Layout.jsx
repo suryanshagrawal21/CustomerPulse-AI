@@ -1,5 +1,6 @@
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Users, Megaphone, MessageSquareText, Zap } from 'lucide-react';
+import { LayoutDashboard, Users, Megaphone, MessageSquareText, Zap, Sun, Moon } from 'lucide-react';
 
 const navigation = [
   { name: 'Dashboard', href: '/', icon: LayoutDashboard },
@@ -12,6 +13,26 @@ export default function Layout({ children }) {
   const location = useLocation();
   const currentPage = navigation.find(n => n.href === location.pathname)?.name || 'Dashboard';
   const isDashboard = location.pathname === '/';
+
+  const [isDark, setIsDark] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('theme') === 'dark' ||
+        (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  }, [isDark]);
+
+  const toggleTheme = () => setIsDark(!isDark);
 
   return (
     <div className="flex h-screen bg-gray-50">
@@ -70,14 +91,20 @@ export default function Layout({ children }) {
       {/* Main Content */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Header */}
-        <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-8 shadow-sm z-10 flex-shrink-0">
+        <header className="h-16 bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-800 flex items-center justify-between px-8 shadow-sm z-10 flex-shrink-0 transition-colors">
           <div>
-            <h2 className="text-lg font-semibold text-gray-800 leading-tight">{currentPage}</h2>
+            <h2 className="text-lg font-semibold text-gray-800 dark:text-white leading-tight">{currentPage}</h2>
             {isDashboard && (
-              <p className="text-sm text-gray-500 leading-tight">Welcome back, Suryansh 👋</p>
+              <p className="text-sm text-gray-500 dark:text-slate-400 leading-tight">Welcome back, Suryansh 👋</p>
             )}
           </div>
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-4">
+            <button
+              onClick={toggleTheme}
+              className="p-2 text-gray-500 hover:text-gray-700 dark:text-slate-400 dark:hover:text-slate-200 bg-gray-100 hover:bg-gray-200 dark:bg-slate-800 dark:hover:bg-slate-700 rounded-full transition-colors"
+            >
+              {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            </button>
             <div className="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-white font-bold text-sm">
               S
             </div>
@@ -85,7 +112,7 @@ export default function Layout({ children }) {
         </header>
 
         {/* Page Content */}
-        <main className="flex-1 overflow-y-auto p-8 bg-gray-50/50">
+        <main className="flex-1 overflow-y-auto p-8 bg-gray-50/50 dark:bg-slate-950 transition-colors">
           {children}
         </main>
       </div>

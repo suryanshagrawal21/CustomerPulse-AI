@@ -107,14 +107,14 @@ export default function Dashboard() {
         {kpiCards.map((card) => (
           <div
             key={card.label}
-            className={`bg-white p-6 rounded-xl shadow-sm border border-gray-100 border-l-4 ${card.border} flex items-center space-x-4 hover:shadow-md transition-shadow duration-200 cursor-default`}
+            className={`bg-white dark:bg-slate-900 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-slate-800 border-l-4 ${card.border} flex items-center space-x-4 hover:shadow-md transition-shadow duration-200 cursor-default`}
           >
-            <div className={`p-3 ${card.iconBg} ${card.iconColor} rounded-lg flex-shrink-0`}>
+            <div className={`p-3 ${card.iconBg} dark:bg-slate-800 ${card.iconColor} rounded-lg flex-shrink-0`}>
               <card.icon className="w-6 h-6" />
             </div>
             <div>
-              <p className="text-sm font-medium text-gray-500">{card.label}</p>
-              <h3 className="text-2xl font-bold text-gray-900">{card.value}</h3>
+              <p className="text-sm font-medium text-gray-500 dark:text-slate-400">{card.label}</p>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{card.value}</h3>
             </div>
           </div>
         ))}
@@ -165,10 +165,10 @@ export default function Dashboard() {
       </div>
 
       {/* Charts Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
         {/* Revenue Trend */}
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 min-w-0">
-          <h3 className="text-lg font-bold text-gray-800 mb-6">Revenue Trend</h3>
+        <div className="bg-white dark:bg-slate-900 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-slate-800 min-w-0">
+          <h3 className="text-lg font-bold text-gray-800 dark:text-white mb-6">Revenue Trend</h3>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={mockRevenueData} margin={{ top: 5, right: 10, left: 0, bottom: 5 }}>
@@ -192,8 +192,8 @@ export default function Dashboard() {
         </div>
 
         {/* Customer Growth */}
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 min-w-0">
-          <h3 className="text-lg font-bold text-gray-800 mb-6">Customer Growth</h3>
+        <div className="bg-white dark:bg-slate-900 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-slate-800 min-w-0">
+          <h3 className="text-lg font-bold text-gray-800 dark:text-white mb-6">Customer Growth</h3>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={mockGrowthData} margin={{ top: 5, right: 10, left: 0, bottom: 5 }}>
@@ -210,10 +210,10 @@ export default function Dashboard() {
         </div>
 
         {/* Campaign Performance — full width */}
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 lg:col-span-2 min-w-0">
+        <div className="bg-white dark:bg-slate-900 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-slate-800 lg:col-span-2 min-w-0">
           <div className="flex items-center justify-between mb-6">
-            <h3 className="text-lg font-bold text-gray-800">Campaign Performance (%)</h3>
-            <div className="flex items-center space-x-4 text-sm text-gray-500">
+            <h3 className="text-lg font-bold text-gray-800 dark:text-white">Campaign Performance (%)</h3>
+            <div className="flex items-center space-x-4 text-sm text-gray-500 dark:text-slate-400">
               <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-violet-500 inline-block" /> Open Rate</span>
               <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-rose-500 inline-block" /> Click Rate</span>
             </div>
