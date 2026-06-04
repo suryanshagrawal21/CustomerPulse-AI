@@ -103,8 +103,8 @@ async function callGeminiAPI(prompt) {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) throw new Error('No API key configured');
 
-  const isOAuth = apiKey.startsWith('AQ.');
-  const model = 'gemini-2.0-flash';
+  const isOAuth = apiKey.startsWith('ya29.');
+  const model = 'gemini-2.5-flash';
   const baseUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
 
   const url = isOAuth ? baseUrl : `${baseUrl}?key=${apiKey}`;
