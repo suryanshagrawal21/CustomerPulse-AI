@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = 'http://localhost:5001/api';
 
 export const generateAIInsights = async (data) => {
   const prompt = `You are a data analyst for a retail CRM platform.
