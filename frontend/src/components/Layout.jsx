@@ -35,7 +35,7 @@ export default function Layout({ children }) {
   const toggleTheme = () => setIsDark(!isDark);
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen bg-gray-50 dark:bg-slate-950 transition-colors">
       {/* Sidebar */}
       <div className="w-64 bg-slate-900 flex flex-col flex-shrink-0">
         {/* Logo */}
